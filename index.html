@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homixa | Everyday Utility, Refined</title>
+  <meta name="description" content="Homixa offers simple, practical everyday utility products designed for a cleaner, easier life." />
+  <style>
+    :root{
+      --bg: #f7f2ea;
+      --surface: rgba(255,255,255,0.72);
+      --surface-strong: #ffffff;
+      --text: #1f1a16;
+      --muted: #6f6258;
+      --line: rgba(31,26,22,0.10);
+      --accent: #a67c52;
+      --accent-dark: #7c5a38;
+      --shadow: 0 18px 50px rgba(31,26,22,0.08);
+      --radius: 28px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(166,124,82,0.10), transparent 35%),
+        radial-gradient(circle at top right, rgba(124,90,56,0.08), transparent 30%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 28px;
+      background:rgba(247,242,234,0.82);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+
+    .brand .name{
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:2px;
+    }
+
+    .brand .tag{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links a{
+      font-size:13px;
+      color:var(--muted);
+      transition:0.2s ease;
+    }
+    .nav-links a:hover{color:var(--text)}
+
+    .container{
+      width:min(1180px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .hero{
+      padding:76px 0 32px;
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:36px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.58)),
+        linear-gradient(135deg, rgba(166,124,82,0.10), rgba(124,90,56,0.04));
+      box-shadow:var(--shadow);
+      padding:34px;
+      min-height:560px;
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(166,124,82,0.10);
+      color:var(--accent-dark);
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:0.2px;
+      margin-bottom:18px;
+    }
+
+    .hero h1{
+      font-size:clamp(40px, 7vw, 74px);
+      line-height:0.98;
+      letter-spacing:-2.8px;
+      max-width:10ch;
+      margin-bottom:18px;
+    }
+
+    .hero p{
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
+      max-width:58ch;
+      margin-bottom:28px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:14px;
+      font-weight:600;
+      transition:0.2s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:var(--text);
+      color:#fff;
+      box-shadow:0 10px 25px rgba(31,26,22,0.14);
+    }
+    .btn-secondary{
+      background:transparent;
+      border-color:var(--line);
+      color:var(--text);
+    }
+
+    .trust-row{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .product-visual{
+      position:relative;
+      min-height:480px;
+      border-radius:30px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.92), rgba(255,255,255,0.60) 28%, rgba(255,255,255,0.20) 55%, transparent 56%),
+        linear-gradient(180deg, #fff8f0, #efe4d4);
+      border:1px solid rgba(166,124,82,0.18);
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .visual-card{
+      width:100%;
+      border-radius:24px;
+      background:rgba(255,255,255,0.62);
+      border:1px solid rgba(31,26,22,0.08);
+      backdrop-filter:blur(12px);
+      padding:20px;
+      box-shadow:0 20px 40px rgba(31,26,22,0.08);
+    }
+
+    .visual-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .visual-badge{
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(166,124,82,0.10);
+      color:var(--accent-dark);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .visual-body{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .mini-tile{
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:16px;
+      min-height:110px;
+    }
+
+    .mini-tile strong{display:block;font-size:14px;margin-bottom:6px}
+    .mini-tile span{font-size:13px;color:var(--muted);line-height:1.5}
+
+    .section{
+      padding:24px 0 10px;
+      margin-top:22px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:16px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .section h2{
+      font-size:clamp(28px, 4vw, 42px);
+      letter-spacing:-1.5px;
+      line-height:1.05;
+    }
+
+    .section .sub{
+      max-width:62ch;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(14px);
+    }
+
+    .card h3{
+      font-size:18px;
+      margin-bottom:10px;
+    }
+    .card p{color:var(--muted);line-height:1.65;font-size:14px}
+
+    .feature-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .feature-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .feature-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.64);
+      border:1px solid var(--line);
+    }
+
+    .dot{
+      width:12px;height:12px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      margin-top:5px;
+      flex:0 0 auto;
+    }
+
+    .feature-item strong{display:block;margin-bottom:4px}
+    .feature-item span{display:block;color:var(--muted);font-size:14px;line-height:1.55}
+
+    .promo{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:18px;
+    }
+
+    .promo-left{
+      border-radius:32px;
+      padding:28px;
+      background:linear-gradient(135deg, #1f1a16, #3b2b1f);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .promo-left h3{font-size:28px;letter-spacing:-1px;line-height:1.15;margin-bottom:12px}
+    .promo-left p{color:rgba(255,255,255,0.78);line-height:1.7;font-size:15px;margin-bottom:20px}
+
+    .promo-right{
+      border-radius:32px;
+      padding:28px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .check{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:14px;
+      color:var(--text);
+    }
+
+    .check b{display:block;margin-bottom:3px}
+    .check p{color:var(--muted);font-size:14px;line-height:1.55}
+
+    .faq{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .faq-item{
+      background:rgba(255,255,255,0.72);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+    .faq-item h4{font-size:16px;margin-bottom:8px}
+    .faq-item p{color:var(--muted);font-size:14px;line-height:1.65}
+
+    .footer{
+      padding:40px 0 60px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+
+    @media (max-width: 920px){
+      .hero-card,
+      .feature-row,
+      .promo,
+      .grid-3,
+      .faq{
+        grid-template-columns:1fr;
+      }
+      .hero-card{padding:22px;min-height:auto}
+      .product-visual{min-height:360px}
+      .nav{padding:14px 16px}
+      .section{padding-top:18px}
+      .hero{padding-top:28px}
+    }
+
+    @media (max-width: 640px){
+      .nav{align-items:flex-start;gap:10px;flex-direction:column}
+      .nav-links{justify-content:flex-start;gap:12px}
+      .hero h1{letter-spacing:-2px}
+      .section-head{align-items:flex-start}
+      .visual-body{grid-template-columns:1fr}
+      .hero-actions{flex-direction:column;align-items:stretch}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">
+      <div class="name">HOMIXA</div>
+      <div class="tag">Everyday utility, refined.</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#collections">Collections</a>
+      <a href="#why">Why Homixa</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div>
+          <div class="eyebrow">Built for daily use • Minimal design • Warm neutral tone</div>
+          <h1>Simple tools for a better everyday routine.</h1>
+          <p>
+            Homixa is a utility-focused brand for people who want practical products that look clean,
+            feel premium, and solve small daily problems without extra complexity.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#collections">Explore collections</a>
+            <a class="btn btn-secondary" href="#why">See what makes us different</a>
+          </div>
+          <div class="trust-row">
+            <span>Fast shipping-ready structure</span>
+            <span>Clean product presentation</span>
+            <span>Built for EU / Western audience</span>
+          </div>
+        </div>
+
+        <div class="product-visual" aria-label="Product visual mockup">
+          <div class="visual-card">
+            <div class="visual-top">
+              <div>
+                <div class="visual-badge">Best-selling style</div>
+              </div>
+              <div class="visual-badge">Homixa</div>
+            </div>
+            <div class="visual-body">
+              <div class="mini-tile">
+                <strong>Kitchen</strong>
+                <span>Compact tools for faster prep, cleaner counters, and easier storage.</span>
+              </div>
+              <div class="mini-tile">
+                <strong>Home</strong>
+                <span>Smart utility items that reduce friction in everyday routines.</span>
+              </div>
+              <div class="mini-tile">
+                <strong>Travel</strong>
+                <span>Portable essentials made to stay useful without taking space.</span>
+              </div>
+              <div class="mini-tile">
+                <strong>Organization</strong>
+                <span>Simple solutions for keeping small spaces tidy and functional.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="collections">
+      <div class="section-head">
+        <div>
+          <h2>Collections that fit real life.</h2>
+        </div>
+        <p class="sub">Keep the store focused on useful, easy-to-understand categories. That helps visitors know exactly what Homixa sells in seconds.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Kitchen Essentials</h3>
+          <p>Practical everyday items that make prep, cleaning, and storage simpler.</p>
+        </div>
+        <div class="card">
+          <h3>Home Helpers</h3>
+          <p>Small tools for a more organized, efficient, and comfortable home.</p>
+        </div>
+        <div class="card">
+          <h3>Travel & Portable</h3>
+          <p>Compact products made for people who want to stay light and ready.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="section-head">
+        <div>
+          <h2>Why Homixa feels different.</h2>
+        </div>
+        <p class="sub">Your store should feel calm, trustworthy, and premium without trying too hard. That is the sweet spot for utility products.</p>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="dot"></div>
+            <div>
+              <strong>Minimal, not empty</strong>
+              <span>Enough visual structure to feel premium, but still clear and easy to shop.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="dot"></div>
+            <div>
+              <strong>Warm neutral palette</strong>
+              <span>The beige, brown, and gold tones match a practical brand that still feels elevated.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="dot"></div>
+            <div>
+              <strong>Clear product categories</strong>
+              <span>Visitors should instantly understand what you sell, even before they scroll.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="dot"></div>
+            <div>
+              <strong>Built for conversion</strong>
+              <span>Strong CTA buttons, trust signals, and simple messaging help turn visitors into buyers.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="promo">
+        <div class="promo-left">
+          <div class="eyebrow" style="background:rgba(255,255,255,0.10);color:#f5e7d4">Store message</div>
+          <h3>Utility products, presented like a premium brand.</h3>
+          <p>
+            Homixa should feel useful first and stylish second. That means product pages, homepage sections,
+            and buttons all need to be simple, direct, and easy to trust.
+          </p>
+          <a class="btn btn-primary" href="#reviews">See customer proof</a>
+        </div>
+        <div class="promo-right">
+          <div class="check">
+            <div class="dot"></div>
+            <div><b>Fast to understand</b><p>Visitors know what the store is about within a few seconds.</p></div>
+          </div>
+          <div class="check">
+            <div class="dot"></div>
+            <div><b>Matches your brand direction</b><p>Minimal, modern, warm, and more practical than flashy.</p></div>
+          </div>
+          <div class="check">
+            <div class="dot"></div>
+            <div><b>Easy to expand later</b><p>You can add product pages, bundles, and collections without redesigning everything.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="section-head">
+        <div>
+          <h2>What shoppers should feel.</h2>
+        </div>
+        <p class="sub">Add real reviews here later. For now, these blocks are placeholders to show the right trust structure.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>“Looks premium.”</h3>
+          <p>The brand feels clean and intentional, not random or cluttered.</p>
+        </div>
+        <div class="card">
+          <h3>“Easy to shop.”</h3>
+          <p>I can understand the categories and product purpose right away.</p>
+        </div>
+        <div class="card">
+          <h3>“Useful products.”</h3>
+          <p>Everything feels like it solves a real daily problem, which builds trust.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-head">
+        <div>
+          <h2>FAQ</h2>
+        </div>
+        <p class="sub">This section helps remove doubt before the customer clicks away.</p>
+      </div>
+
+      <div class="faq">
+        <div class="faq-item">
+          <h4>What kind of products does Homixa sell?</h4>
+          <p>Everyday utility products for home, kitchen, organization, and portable use.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is this homepage ready for Shopify?</h4>
+          <p>Yes, this layout works as a homepage structure. You can later replace the placeholders with real collections and product links.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © 2026 Homixa. Everyday utility, refined.
+    </div>
+  </main>
+</body>
+</html>
